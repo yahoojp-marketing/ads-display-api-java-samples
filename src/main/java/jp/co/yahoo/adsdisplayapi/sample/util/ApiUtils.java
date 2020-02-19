@@ -7,8 +7,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
-import javax.net.ssl.HttpsURLConnection;
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -18,6 +23,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.ResourceBundle;
+
+import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Utility method collection for Java Sample Program.
@@ -148,7 +155,7 @@ public class ApiUtils {
 
     // download
     try(BufferedInputStream is = new BufferedInputStream(connection.getInputStream());
-        FileOutputStream fos = new FileOutputStream(filepath, false)) {
+      FileOutputStream fos = new FileOutputStream(filepath, false)) {
       int b;
       while ((b = is.read()) != -1) {
         fos.write(b);
@@ -167,9 +174,9 @@ public class ApiUtils {
     URL url = URI.create("https://biz-oauth.yahoo.co.jp/oauth/v1/token").toURL();
 
     byte[] parameter = ("grant_type=refresh_token&" //
-        + "client_id=" + CLIENT_ID + "&" //
-        + "client_secret=" + CLIENT_SECRET + "&" //
-        + "refresh_token=" + REFRESH_TOKEN + "&" //
+      + "client_id=" + CLIENT_ID + "&" //
+      + "client_secret=" + CLIENT_SECRET + "&" //
+      + "refresh_token=" + REFRESH_TOKEN + "&" //
     ).getBytes(StandardCharsets.UTF_8);
 
     HttpsURLConnection connection = createConnection(url, "application/x-www-form-urlencoded", parameter.length);

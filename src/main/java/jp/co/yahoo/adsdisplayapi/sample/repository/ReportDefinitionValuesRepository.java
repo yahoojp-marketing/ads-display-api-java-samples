@@ -4,8 +4,8 @@
 package jp.co.yahoo.adsdisplayapi.sample.repository;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v0.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v0.model.ReportDefinitionServiceValue;
+import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceValue;
 
 import java.util.ArrayList;
 import java.util.List;

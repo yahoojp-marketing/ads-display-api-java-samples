@@ -1,10 +1,12 @@
 --------------------------------
 【バージョン】
 --------------------------------
-v0
+v1
 
 ■変更履歴
 -----------
+2020/2
+- v1に対応しました。
 2019/12
 - v0に対応しました。
 
@@ -57,7 +59,7 @@ mvn clean install
 
 OpenAPI generatorによって生成されたモデルは以下に出力されます。
 ```
-target/generated-sources/annotations/jp/co/yahoo/adsdisplayapi/v0/model
+target/generated-sources/annotations/jp/co/yahoo/adsdisplayapi/v1/model
 ```
 
 --------------------------------

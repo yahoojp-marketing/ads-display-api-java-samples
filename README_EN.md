@@ -1,10 +1,12 @@
 --------------------------------
 [Version]
 --------------------------------
-v0
+v1
 
 ■ Change logs
 -----------
+February 2020
+- v1 is now available.
 December 2019
 - v0 is now available.
 
@@ -57,7 +59,7 @@ mvn clean install
 
 Output the models to below directory by the OpenAPI generator.
 ```
-target/generated-sources/annotations/jp/co/yahoo/adsdisplayapi/v0/model
+target/generated-sources/annotations/jp/co/yahoo/adsdisplayapi/v1/model
 ```
 
 --------------------------------

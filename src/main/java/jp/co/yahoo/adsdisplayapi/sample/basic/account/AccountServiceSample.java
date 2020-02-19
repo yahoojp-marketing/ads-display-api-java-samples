@@ -4,7 +4,16 @@
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v0.model.*;
+import jp.co.yahoo.adsdisplayapi.v1.model.Account;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceValue;
 
 import java.util.List;
 

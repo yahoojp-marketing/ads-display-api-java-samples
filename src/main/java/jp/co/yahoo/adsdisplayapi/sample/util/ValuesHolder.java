@@ -3,7 +3,7 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
-import jp.co.yahoo.adsdisplayapi.v0.model.ReportDefinitionServiceValue;
+import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceValue;
 
 import java.util.ArrayList;
 import java.util.List;

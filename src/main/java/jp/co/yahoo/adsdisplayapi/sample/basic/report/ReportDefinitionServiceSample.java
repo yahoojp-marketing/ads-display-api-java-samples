@@ -1,34 +1,33 @@
 /**
- * Copyright (C) 2019 Yahoo Japan Corporation. All Rights Reserved.
+ * Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.report;
-
-import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
-import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceDateRangeType;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceDownloadEncode;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceDownloadFormat;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceFieldAttribute;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceFrequencyRange;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceGetReportFieldsResponse;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceJobStatus;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceLang;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceReportSortField;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceReportSortType;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceType;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceValue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
+import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
+import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceDownloadSelector;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceFieldAttribute;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceFrequencyRange;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetReportFields;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetReportFieldsResponse;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDateRangeType;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDownloadEncode;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDownloadFormat;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportJobStatus;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportLanguage;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportSortField;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportSortType;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceType;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceValue;
 
 /**
  * example ReportDefinitionService operation and Utility method collection.
@@ -194,7 +193,7 @@ public class ReportDefinitionServiceSample {
   public static ReportDefinition createExampleReportDefinition() {
     ReportDefinition operand = new ReportDefinition();
     operand.setReportName("REACH-FREQUENCY-REPORT");
-    operand.setDateRangeType(ReportDefinitionServiceDateRangeType.YESTERDAY);
+    operand.setReportDateRangeType(ReportDefinitionServiceReportDateRangeType.YESTERDAY);
     ReportDefinitionServiceReportSortField sortField = new ReportDefinitionServiceReportSortField();
     sortField.setReportSortType(ReportDefinitionServiceReportSortType.ASC);
     sortField.field("FREQUENCY");
@@ -210,9 +209,9 @@ public class ReportDefinitionServiceSample {
       "UNIQUE_USERS" //
     ));
     operand.setFrequencyRange(ReportDefinitionServiceFrequencyRange.DAILY);
-    operand.setDownloadFormat(ReportDefinitionServiceDownloadFormat.CSV);
-    operand.setDownloadEncode(ReportDefinitionServiceDownloadEncode.UTF_8);
-    operand.setLang(ReportDefinitionServiceLang.EN);
+    operand.setReportDownloadFormat(ReportDefinitionServiceReportDownloadFormat.CSV);
+    operand.setReportDownloadEncode(ReportDefinitionServiceReportDownloadEncode.UTF_8);
+    operand.setReportLanguage(ReportDefinitionServiceReportLanguage.EN);
     return operand;
   }
 
@@ -238,13 +237,13 @@ public class ReportDefinitionServiceSample {
 
       // check status
       for (ReportDefinitionServiceValue reportValues : getResponse) {
-        ReportDefinitionServiceJobStatus status = reportValues.getReportDefinition().getJobStatus();
+        ReportDefinitionServiceReportJobStatus status = reportValues.getReportDefinition().getReportJobStatus();
         if (status == null) {
           throw new Exception("Fail to get Report.");
         }
         switch (status) {
           default:
-          case ACCEPTED:
+          case WAIT:
           case IN_PROGRESS:
             continue;
           case CANCELED:

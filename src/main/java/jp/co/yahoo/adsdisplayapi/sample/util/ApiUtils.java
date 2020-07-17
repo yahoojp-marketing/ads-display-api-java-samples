@@ -1,12 +1,11 @@
 /*
-  Copyright (C) 2019 Yahoo Japan Corporation. All Rights Reserved.
+  Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -23,7 +22,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import javax.net.ssl.HttpsURLConnection;
 
 /**

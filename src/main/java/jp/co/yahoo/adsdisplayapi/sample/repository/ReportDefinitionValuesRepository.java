@@ -1,14 +1,13 @@
 /**
- * Copyright (C) 2019 Yahoo Japan Corporation. All Rights Reserved.
+ * Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.repository;
 
-import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v1.model.ReportDefinitionServiceValue;
-
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceValue;
 
 /**
  * Utility method collection for Java Sample Program.

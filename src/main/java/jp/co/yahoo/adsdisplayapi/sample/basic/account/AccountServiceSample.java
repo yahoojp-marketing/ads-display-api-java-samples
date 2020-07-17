@@ -1,21 +1,20 @@
 /**
- * Copyright (C) 2019 Yahoo Japan Corporation. All Rights Reserved.
+ * Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
-import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v1.model.Account;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceAutoTaggingEnabled;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceStatus;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceType;
-import jp.co.yahoo.adsdisplayapi.v1.model.AccountServiceValue;
-
 import java.util.List;
+import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
+import jp.co.yahoo.adsdisplayapi.v2.model.Account;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceValue;
 
 /**
  * example AccountService operation and Utility method collection.
@@ -54,7 +53,6 @@ public class AccountServiceSample {
       // =================================================================
       // create request.
       Account operand = new Account();
-      operand.setAccountName("SampleAccount_UpdateOn_" + ApiUtils.getCurrentTimestamp());
       operand.setDeliveryStatus(AccountServiceDeliveryStatus.PAUSED);
       operand.setAutoTaggingEnabled(AccountServiceAutoTaggingEnabled.TRUE);
 
@@ -77,7 +75,7 @@ public class AccountServiceSample {
    * @param operation AccountOperation
    * @return List<AccountValues>
    */
-  public static AccountServiceValue mutate(AccountServiceOperation operation, String action) throws Exception {
+  public static List<AccountServiceValue> mutate(AccountServiceOperation operation, String action) throws Exception {
 
     AccountServiceMutateResponse response = ApiUtils.execute(SERVICE_NAME, action, operation, AccountServiceMutateResponse.class);
     System.out.println(operation);

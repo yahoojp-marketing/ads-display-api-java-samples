@@ -42,12 +42,12 @@ Java環境を構築するために、以下をインストールしてくださ�
 --------------------------------
 OpenAPI Generatorを実行しJava用のmodelを生成します。
 ```
-openapi-generator generate -i https://raw.githubusercontent.com/yahoojp-marketing/ads-search-api-documents/master/design/v2/Route.yaml -g java --global-property=models --model-package jp.co.yahoo.adssearchapi.v2.model
+openapi-generator generate -i https://raw.githubusercontent.com/yahoojp-marketing/ads-display-api-documents/master/design/v2/Route.yaml -g java --global-property=models --model-package jp.co.yahoo.adsdisplayapi.v2.model
 ```
 
 OpenAPI generatorによって生成されたモデルは以下に出力されます。
 ```
-src/main/java/jp/co/yahoo/adssearchapi/v2/model
+src/main/java/jp/co/yahoo/adsdisplayapi/v2/model
 ```
 
 --------------------------------

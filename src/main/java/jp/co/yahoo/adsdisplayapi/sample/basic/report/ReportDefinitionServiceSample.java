@@ -9,25 +9,27 @@ import java.util.List;
 import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
 import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceFieldAttribute;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceFrequencyRange;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetReportFieldsResponse;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDateRangeType;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDownloadEncode;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportDownloadFormat;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportJobStatus;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportLanguage;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportSortField;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceReportSortType;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceType;
-import jp.co.yahoo.adsdisplayapi.v2.model.ReportDefinitionServiceValue;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceDownloadSelector;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceFieldAttribute;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceFrequencyRange;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceFrequencyReportCondition;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceGetReportFields;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceGetReportFieldsResponse;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportDateRangeType;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportDownloadEncode;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportDownloadFormat;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportJobStatus;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportLanguage;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportSortField;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportSortType;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceReportTypeCondition;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceType;
+import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceValue;
 
 /**
  * example ReportDefinitionService operation and Utility method collection.
@@ -208,10 +210,15 @@ public class ReportDefinitionServiceSample {
       "CLICK", //
       "UNIQUE_USERS" //
     ));
-    operand.setFrequencyRange(ReportDefinitionServiceFrequencyRange.DAILY);
     operand.setReportDownloadFormat(ReportDefinitionServiceReportDownloadFormat.CSV);
     operand.setReportDownloadEncode(ReportDefinitionServiceReportDownloadEncode.UTF_8);
     operand.setReportLanguage(ReportDefinitionServiceReportLanguage.EN);
+    ReportDefinitionServiceReportTypeCondition condition = new ReportDefinitionServiceReportTypeCondition();
+    ReportDefinitionServiceFrequencyReportCondition reportCondition = new ReportDefinitionServiceFrequencyReportCondition();
+    reportCondition.setFrequencyRange(ReportDefinitionServiceFrequencyRange.DAILY);
+    condition.setFrequencyReportCondition(reportCondition);
+    condition.setReportType(ReportDefinitionServiceType.FREQUENCY);
+    operand.setReportTypeCondition(condition);
     return operand;
   }
 

@@ -5,16 +5,16 @@ package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
 import java.util.List;
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v2.model.Account;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceAutoTaggingEnabled;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceStatus;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceType;
-import jp.co.yahoo.adsdisplayapi.v2.model.AccountServiceValue;
+import jp.co.yahoo.adsdisplayapi.v3.model.Account;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v3.model.AccountServiceValue;
 
 /**
  * example AccountService operation and Utility method collection.

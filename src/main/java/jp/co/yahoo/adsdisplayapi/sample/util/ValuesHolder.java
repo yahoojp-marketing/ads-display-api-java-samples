@@ -5,7 +5,7 @@ package jp.co.yahoo.adsdisplayapi.sample.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.yahoo.adsdisplayapi.v3.model.ReportDefinitionServiceValue;
+import jp.co.yahoo.adsdisplayapi.v4.model.ReportDefinitionServiceValue;
 
 /**
  * Utility method collection for Java Sample Program.

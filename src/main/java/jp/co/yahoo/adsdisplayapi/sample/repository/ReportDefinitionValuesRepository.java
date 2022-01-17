@@ -6,8 +6,8 @@ package jp.co.yahoo.adsdisplayapi.sample.repository;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceValue;
+import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceValue;
 
 /**
  * Utility method collection for Java Sample Program.

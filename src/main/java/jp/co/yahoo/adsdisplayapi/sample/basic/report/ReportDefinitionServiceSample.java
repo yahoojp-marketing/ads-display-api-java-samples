@@ -3,31 +3,32 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.report;
 
-import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
-import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceFieldAttribute;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetReportFieldsResponse;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportDateRangeType;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportDownloadEncode;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportDownloadFormat;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportJobStatus;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportLanguage;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportSortField;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportSortType;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceType;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceValue;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
+import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
+import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceDownloadSelector;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceFieldAttribute;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceFrequencyRange;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceGetReportFields;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceGetReportFieldsResponse;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportDateRangeType;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportDownloadEncode;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportDownloadFormat;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportJobStatus;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportLanguage;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportSortField;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportSortType;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceReportTypeCondition;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceType;
+import jp.co.yahoo.adsdisplayapi.v6.model.ReportDefinitionServiceValue;
 
 /**
  * example ReportDefinitionService operation and Utility method collection.

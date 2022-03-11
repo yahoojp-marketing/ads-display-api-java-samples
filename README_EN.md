@@ -1,31 +1,22 @@
---------------------------------
-[Version]
---------------------------------
+## Version
+
 v7
 
---------------------------------
-[Overview]
---------------------------------
+## Overview
+
 These code samples show how to use Java to call APIs.
 
---------------------------------
-[Contents]
---------------------------------
+## Contents
+
 src/main/
   - resources/
-    - api_config.properties.dist    : Config files to specify Ids.
+    - api_config.properties.dist    : Config files to specify Ids. Rename this file to "api_config.properties"
   - java/jp/co/yahoo/adsdisplayapi/sample
     - basic/                      : Examples of each services.
-    - repository/                 : Utilities which help you use the code samples.
     - util/                       : Utilities which help you use the code samples.
 
-download/                           : Directory where downloaded files stored when using download feature.
+## Development environment
 
-module/                           : Modules which need for starting the code samples.
-
---------------------------------
-[Development environment]
---------------------------------
 Install the software below to organize environment.
 
 1. Java 1.8(Java SE Development Kit 8 or above
@@ -37,17 +28,14 @@ Install the software below to organize environment.
   - CLIENT_SECRET        : Client secret (required)
   - REFRESH_TOKEN        : Refresh token (required)
 
---------------------------------
-[How to execute Sample Code]
---------------------------------
+## How to execute Sample Code
+
 Example
 ```
 mvn exec:java -Dexec.mainClass=jp.co.yahoo.adsdisplayapi.sample.basic.report.ReportDefinitionServiceSample
 ```
 
---------------------------------
-NOTICE：Yahoo! JAPAN Ads Display Ads API - For use of sample code
---------------------------------
+## NOTICE：Yahoo! JAPAN Ads Display Ads API - For use of sample code
 
 The sample code of Yahoo! JAPAN Ads API is provided to API users only who concluded the contract of "Application to Use Yahoo! JAPAN Promotional Ads API" with Yahoo Japan Corporation.  
 Additionally, please note that Yahoo Japan Corporation may change the contents and the specification of the sample code, and may discontinue providing the sample code without any notice.  

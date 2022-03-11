@@ -1,16 +1,15 @@
 /**
- * Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
+ * Copyright (C) 2022 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.report;
 
-import jp.co.yahoo.adsdisplayapi.sample.repository.ValuesRepositoryFacade;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.sample.util.ValuesHolder;
+import jp.co.yahoo.adsdisplayapi.v7.api.ReportDefinitionServiceApi;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinition;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceFieldAttribute;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetReportFieldsResponse;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceGetResponse;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceMutateResponse;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceOperation;
@@ -23,18 +22,15 @@ import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportSortField
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceReportSortType;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceSelector;
 import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceType;
-import jp.co.yahoo.adsdisplayapi.v7.model.ReportDefinitionServiceValue;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import org.springframework.core.io.Resource;
+import org.springframework.util.StreamUtils;
 
 /**
- * example ReportDefinitionService operation and Utility method collection.
+ * example ReportDefinitionService operation.
  */
 public class ReportDefinitionServiceSample {
 
-  private static final String SERVICE_NAME = "ReportDefinitionService";
+  private static final ReportDefinitionServiceApi reportDefinitionService = new ReportDefinitionServiceApi(ApiUtils.getYahooJapanAdsApiClient());
 
   /**
    * example ReportDefinitionService operation.
@@ -43,65 +39,18 @@ public class ReportDefinitionServiceSample {
    */
   public static void main(String[] args) throws Exception {
     try {
-      // =================================================================
-      // Setting
-      // =================================================================
-      ValuesHolder valuesHolder = new ValuesHolder();
-      ValuesRepositoryFacade valuesRepositoryFacade = new ValuesRepositoryFacade(valuesHolder);
-      long accountId = ApiUtils.ACCOUNT_ID;
+      getReportFields(); // ReportDefinitionService/getReportFields
 
-      // =================================================================
-      // ReportDefinitionService getReportFields
-      // =================================================================
-      // create request.
-      ReportDefinitionServiceGetReportFields getReportFieldsRequest = new ReportDefinitionServiceGetReportFields();
-      getReportFieldsRequest.setType(ReportDefinitionServiceType.AD);
+      ReportDefinitionServiceMutateResponse mutateResponse = add(); // ReportDefinitionService/add
 
-      // run
-      getReportFields(getReportFieldsRequest);
+      Long reportJobId = mutateResponse.getRval().getValues().get(0).getReportDefinition().getReportJobId(); // extract reportJobId
+      get(reportJobId); // ReportDefinitionService/get
 
-      // =================================================================
-      // ReportDefinitionService ADD
-      // =================================================================
-      // create request.
-      ReportDefinitionServiceOperation addRequest = buildExampleMutateRequest(accountId, Collections.singletonList(createExampleReportDefinition()));
+      checkReportJobStatus(reportJobId); // check job status
 
-      // run
-      List<ReportDefinitionServiceValue> addResponse = mutate(addRequest, "add");
-      valuesHolder.setReportDefinitionValuesList(addResponse);
+      download(reportJobId); // ReportDefinitionService/download
 
-      // =================================================================
-      // ReportDefinitionService GET
-      // =================================================================
-      // check job status
-      checkStatus(valuesRepositoryFacade.getReportDefinitionValuesRepository().getReportJobIds());
-
-      // create request.
-      ReportDefinitionServiceSelector getRequest = buildExampleGetRequest(accountId, valuesRepositoryFacade.getReportDefinitionValuesRepository().getReportJobIds());
-
-      // run
-      List<ReportDefinitionServiceValue> getResponse = get(getRequest);
-
-      long getJobIds = 0;
-      for (ReportDefinitionServiceValue reportValues : getResponse) {
-        getJobIds = reportValues.getReportDefinition().getReportJobId();
-      }
-
-      // =================================================================
-      // ReportService download (http request)
-      // =================================================================
-      ReportDefinitionServiceDownloadSelector downloadSelector = buildExampleDownloadRequest(accountId, getJobIds);
-      ApiUtils.download(SERVICE_NAME, "download", downloadSelector, "reportDownloadSample.csv");;
-
-      // =================================================================
-      // ReportDefinitionService REMOVE
-      // =================================================================
-      // create request.
-      ReportDefinitionServiceOperation removeRequest = buildExampleMutateRequest(accountId, valuesRepositoryFacade.getReportDefinitionValuesRepository().getReportDefinitions());
-
-      // run
-      mutate(removeRequest, "remove");
-
+      remove(reportJobId); //ReportDefinitionService/remove
     } catch (Exception e) {
       e.printStackTrace();
       throw e;
@@ -109,150 +58,122 @@ public class ReportDefinitionServiceSample {
   }
 
   /**
-   * example get ReportDefinitions.
-   *
-   * @param selector ReportDefinitionSelector
-   * @return ReportDefinitionValues
+   * example get reportFields.
    */
-  public static List<ReportDefinitionServiceValue> get(ReportDefinitionServiceSelector selector) throws Exception {
+  private static void getReportFields() {
+    // Create the getReportFields.
+    ReportDefinitionServiceGetReportFields getReportFields = new ReportDefinitionServiceGetReportFields();
+    getReportFields.setType(ReportDefinitionServiceType.AD);
 
-    ReportDefinitionServiceGetResponse reportDefinitionService = ApiUtils.execute(SERVICE_NAME, "get", selector, ReportDefinitionServiceGetResponse.class);
-
-    // Response
-    return reportDefinitionService.getRval().getValues();
+    // Get the reportFields.
+    reportDefinitionService.reportDefinitionServiceGetReportFieldsPost(getReportFields);
   }
 
   /**
-   * example getReportFields ReportDefinitions.
-   *
-   * @param reportFields ReportFields
-   * @return ReportFieldAttribute
+   * example add report.
    */
-  public static List<ReportDefinitionServiceFieldAttribute> getReportFields(ReportDefinitionServiceGetReportFields reportFields) throws Exception {
-
-    ReportDefinitionServiceGetReportFieldsResponse reportDefinitionService = ApiUtils.execute(SERVICE_NAME, "getReportFields", reportFields, ReportDefinitionServiceGetReportFieldsResponse.class);
-
-    // Response
-    return reportDefinitionService.getRval().getFields();
-  }
-
-  /**
-   * example mutate ReportDefinitions.
-   *
-   * @param operation ReportDefinitionOperation
-   * @return ReportDefinitionValues
-   */
-  public static List<ReportDefinitionServiceValue> mutate(ReportDefinitionServiceOperation operation, String action) throws Exception {
-
-    ReportDefinitionServiceMutateResponse reportDefinitionService = ApiUtils.execute(SERVICE_NAME, action, operation, ReportDefinitionServiceMutateResponse.class);
-
-    // Response
-    return reportDefinitionService.getRval().getValues();
-  }
-
-  /**
-   * example get request.
-   *
-   * @param accountId long
-   * @param reportJobIds List<Long>
-   * @return ReportDefinitionSelector
-   */
-  public static ReportDefinitionServiceSelector buildExampleGetRequest(long accountId, List<Long> reportJobIds) {
-    ReportDefinitionServiceSelector selector = new ReportDefinitionServiceSelector();
-    selector.setAccountId(accountId);
-    selector.setReportJobIds(reportJobIds);
-    return selector;
-  }
-
-  private static ReportDefinitionServiceDownloadSelector buildExampleDownloadRequest(long accountId, long reportJobId) {
-    ReportDefinitionServiceDownloadSelector selector = new ReportDefinitionServiceDownloadSelector();
-    selector.setAccountId(accountId);
-    selector.setReportJobId(reportJobId);
-    return selector;
-  }
-
-  /**
-   * example mutate request.
-   *
-   * @param accountId long
-   * @param operand   List<ReportDefinition>
-   * @return ReportDefinitionOperation
-   */
-  public static ReportDefinitionServiceOperation buildExampleMutateRequest(long accountId, List<ReportDefinition> operand) {
-    ReportDefinitionServiceOperation operation = new ReportDefinitionServiceOperation();
-    operation.setAccountId(accountId);
-    operation.getOperand().addAll(operand);
-    return operation;
-  }
-
-  /**
-   * example ReportDefinition request.
-   *
-   * @return ReportDefinition
-   */
-  public static ReportDefinition createExampleReportDefinition() {
+  private static ReportDefinitionServiceMutateResponse add() {
+    // Create the operation.
+    ReportDefinitionServiceReportSortField sortField = new ReportDefinitionServiceReportSortField();
+    sortField.setReportSortType(ReportDefinitionServiceReportSortType.ASC);
+    sortField.setField("ACCOUNT_ID");
     ReportDefinition operand = new ReportDefinition();
     operand.setReportName("REACH-FREQUENCY-REPORT");
     operand.setReportDateRangeType(ReportDefinitionServiceReportDateRangeType.YESTERDAY);
-    ReportDefinitionServiceReportSortField sortField = new ReportDefinitionServiceReportSortField();
-    sortField.setReportSortType(ReportDefinitionServiceReportSortType.ASC);
-    sortField.field("ACCOUNT_ID");
-    operand.setSortFields(Arrays.asList(sortField));
-    operand.setFields(Arrays.asList( //
-      "ACCOUNT_ID", //
-      "ACCOUNT_NAME" //
-    ));
+    operand.addSortFieldsItem(sortField);
+    operand.addFieldsItem("ACCOUNT_ID");
+    operand.addFieldsItem("ACCOUNT_NAME");
     operand.setReportDownloadFormat(ReportDefinitionServiceReportDownloadFormat.CSV);
     operand.setReportDownloadEncode(ReportDefinitionServiceReportDownloadEncode.UTF8);
     operand.setReportLanguage(ReportDefinitionServiceReportLanguage.EN);
-    return operand;
+    ReportDefinitionServiceOperation operation = new ReportDefinitionServiceOperation();
+    operation.setAccountId(ApiUtils.ACCOUNT_ID);
+    operation.addOperandItem(operand);
+
+    // Add the report.
+    return reportDefinitionService.reportDefinitionServiceAddPost(operation);
+  }
+
+  /**
+   * example get report.
+   *
+   * @param reportJobId
+   */
+  private static ReportDefinitionServiceGetResponse get(Long reportJobId) {
+    // Create the selector.
+    ReportDefinitionServiceSelector selector = new ReportDefinitionServiceSelector();
+    selector.setAccountId(ApiUtils.ACCOUNT_ID);
+    selector.addReportJobIdsItem(reportJobId);
+
+    // Get the report.
+    return reportDefinitionService.reportDefinitionServiceGetPost(selector);
   }
 
   /**
    * example check Report job status.
    *
-   * @param jobIds List<Long>
+   * @param reportJobId
+   * @throws Exception
    */
-  public static void checkStatus(List<Long> jobIds) throws Exception {
-
+  private static void checkReportJobStatus(Long reportJobId) throws Exception {
     // call 30sec sleep * 30 = 15minute
     for (int i = 0; i < 30; i++) {
-
       // sleep 30 second.
       System.out.println("\n***** sleep 30 seconds for Report Download Job *****\n");
       Thread.sleep(30000);
 
-      // get
-      ReportDefinitionServiceSelector getRequest = buildExampleGetRequest(ApiUtils.ACCOUNT_ID, jobIds);
-      List<ReportDefinitionServiceValue> getResponse = get(getRequest);
+      ReportDefinitionServiceGetResponse response = get(reportJobId);
 
-      int completedCount = 0;
-
-      // check status
-      for (ReportDefinitionServiceValue reportValues : getResponse) {
-        ReportDefinitionServiceReportJobStatus status = reportValues.getReportDefinition().getReportJobStatus();
-        if (status == null) {
-          throw new Exception("Fail to get Report.");
-        }
-        switch (status) {
-          default:
-          case WAIT:
-          case IN_PROGRESS:
-            continue;
-          case CANCELED:
-          case FAILED:
-            throw new Exception("Report Job Status failed.");
-          case COMPLETED:
-            completedCount++;
-            continue;
-        }
+      ReportDefinitionServiceReportJobStatus status = response.getRval().getValues().get(0).getReportDefinition().getReportJobStatus();
+      if (status == null) {
+        throw new Exception("Fail to get Report.");
       }
-
-      if (getResponse.size() == completedCount) {
-        return;
-      }
-    }
-
-    throw new Exception("Fail to get Report.");
+      switch (status) {
+        default:
+        case WAIT:
+        case IN_PROGRESS:
+          continue;
+        case CANCELED:
+        case FAILED:
+          throw new Exception("Report Job Status failed.");
+        case COMPLETED:
+          return;
+      } // switch
+    } // for
   }
+
+  /**
+   * example download report.
+   *
+   * @param reportJobId
+   * @throws IOException
+   */
+  private static void download(Long reportJobId) throws IOException {
+    // Create the selector.
+    ReportDefinitionServiceDownloadSelector selector = new ReportDefinitionServiceDownloadSelector();
+    selector.setAccountId(ApiUtils.ACCOUNT_ID);
+    selector.setReportJobId(reportJobId);
+
+    // Download the report.
+    Resource report = reportDefinitionService.reportDefinitionServiceDownloadPost(selector);
+    System.out.println("### reportString=\n" + StreamUtils.copyToString(report.getInputStream(), StandardCharsets.UTF_8));
+  }
+
+  /**
+   * example remove report.
+   *
+   * @param reportJobId
+   */
+  private static void remove(Long reportJobId) {
+    // Create the operation.
+    ReportDefinition operand = new ReportDefinition();
+    operand.setReportJobId(reportJobId);
+    ReportDefinitionServiceOperation operation = new ReportDefinitionServiceOperation();
+    operation.setAccountId(ApiUtils.ACCOUNT_ID);
+    operation.addOperandItem(operand);
+
+    // Remove the report.
+    reportDefinitionService.reportDefinitionServiceRemovePost(operation);
+  }
+
 }

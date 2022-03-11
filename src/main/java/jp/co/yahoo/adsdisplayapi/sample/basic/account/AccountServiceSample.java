@@ -1,27 +1,24 @@
 /**
- * Copyright (C) 2020 Yahoo Japan Corporation. All Rights Reserved.
+ * Copyright (C) 2022 Yahoo Japan Corporation. All Rights Reserved.
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
-import java.util.List;
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
+import jp.co.yahoo.adsdisplayapi.v7.api.AccountServiceApi;
 import jp.co.yahoo.adsdisplayapi.v7.model.Account;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceAutoTaggingEnabled;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceMutateResponse;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceOperation;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceSelector;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceStatus;
 import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceType;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceValue;
 
 /**
- * example AccountService operation and Utility method collection.
+ * example AccountService operation.
  */
 public class AccountServiceSample {
 
-  private static final String SERVICE_NAME = "AccountService";
+  private static final AccountServiceApi accountService = new AccountServiceApi(ApiUtils.getYahooJapanAdsApiClient());
 
   /**
    * example AccountService operation.
@@ -30,39 +27,8 @@ public class AccountServiceSample {
    */
   public static void main(String[] args) throws Exception {
     try {
-      // =================================================================
-      // Setting
-      // =================================================================
-      long accountId = ApiUtils.ACCOUNT_ID;
-
-      // =================================================================
-      // AccountService GET
-      // =================================================================
-      // create request.
-      AccountServiceSelector selector = new AccountServiceSelector();
-      selector.addAccountStatusesItem(AccountServiceStatus.SERVING);
-      selector.addAccountStatusesItem(AccountServiceStatus.ENDED);
-      selector.addAccountTypesItem(AccountServiceType.INVOICE);
-      selector.addAccountTypesItem(AccountServiceType.PREPAY);
-
-      // run
-      get(selector);
-
-      // =================================================================
-      // AccountService SET
-      // =================================================================
-      // create request.
-      Account operand = new Account();
-      operand.setDeliveryStatus(AccountServiceDeliveryStatus.PAUSED);
-      operand.setAutoTaggingEnabled(AccountServiceAutoTaggingEnabled.TRUE);
-
-      AccountServiceOperation operation = new AccountServiceOperation();
-      operation.getOperand().add(operand);
-      operation.setAccountId(accountId);
-
-      // run
-      mutate(operation, "set");
-
+      get(); // AccountService/get
+      set(); // AccountService/set
     } catch (Exception e) {
       e.printStackTrace();
       throw e;
@@ -70,31 +36,34 @@ public class AccountServiceSample {
   }
 
   /**
-   * example mutate accounts.
-   *
-   * @param operation AccountOperation
-   * @return List<AccountValues>
+   * example get accounts.
    */
-  public static List<AccountServiceValue> mutate(AccountServiceOperation operation, String action) throws Exception {
+  private static void get() {
+    // Create the selector.
+    AccountServiceSelector selector = new AccountServiceSelector();
+    selector.addAccountStatusesItem(AccountServiceStatus.SERVING);
+    selector.addAccountStatusesItem(AccountServiceStatus.ENDED);
+    selector.addAccountTypesItem(AccountServiceType.INVOICE);
+    selector.addAccountTypesItem(AccountServiceType.PREPAY);
 
-    AccountServiceMutateResponse response = ApiUtils.execute(SERVICE_NAME, action, operation, AccountServiceMutateResponse.class);
-    System.out.println(operation);
-
-    // Response
-    return response.getRval().getValues();
+    // Get the account.
+    accountService.accountServiceGetPost(selector);
   }
 
   /**
-   * example get accounts.
-   *
-   * @param selector AccountSelector
-   * @return AccountValues
+   * example set account.
    */
-  public static List<AccountServiceValue> get(AccountServiceSelector selector) throws Exception {
+  private static void set() {
+    // Create the operation.
+    Account operand = new Account();
+    operand.setDeliveryStatus(AccountServiceDeliveryStatus.PAUSED);
+    operand.setAutoTaggingEnabled(AccountServiceAutoTaggingEnabled.TRUE);
+    AccountServiceOperation operation = new AccountServiceOperation();
+    operation.setAccountId(ApiUtils.ACCOUNT_ID);
+    operation.addOperandItem(operand);
 
-    AccountServiceGetResponse response = ApiUtils.execute(SERVICE_NAME, "get", selector, AccountServiceGetResponse.class);
-
-    // Response
-    return response.getRval().getValues();
+    // Set the account.
+    accountService.accountServiceSetPost(operation);
   }
+
 }

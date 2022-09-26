@@ -4,14 +4,14 @@
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v7.api.AccountServiceApi;
-import jp.co.yahoo.adsdisplayapi.v7.model.Account;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceAutoTaggingEnabled;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceStatus;
-import jp.co.yahoo.adsdisplayapi.v7.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v9.api.AccountServiceApi;
+import jp.co.yahoo.adsdisplayapi.v9.model.Account;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v9.model.AccountServiceType;
 
 /**
  * example AccountService operation.

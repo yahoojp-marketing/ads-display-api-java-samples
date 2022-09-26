@@ -4,7 +4,7 @@
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
 import java.util.ResourceBundle;
-import jp.co.yahoo.adsdisplayapi.v8.YahooJapanAdsApiClient;
+import jp.co.yahoo.adsdisplayapi.v9.YahooJapanAdsApiClient;
 
 /**
  * Utility method collection for Java Sample Program.

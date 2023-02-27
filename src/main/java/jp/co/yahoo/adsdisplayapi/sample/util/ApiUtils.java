@@ -3,8 +3,10 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
+import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
-import jp.co.yahoo.adsdisplayapi.v9.YahooJapanAdsApiClient;
+import jp.co.yahoo.adsdisplayapi.v10.YahooJapanAdsApiClient;
 
 /**
  * Utility method collection for Java Sample Program.
@@ -25,10 +27,14 @@ public class ApiUtils {
   static {
     ResourceBundle bundle = ResourceBundle.getBundle("api_config");
 
-    ACCOUNT_ID = Long.parseLong(bundle.getString("ACCOUNT_ID"));
-    CLIENT_ID = bundle.getString("CLIENT_ID");
-    CLIENT_SECRET = bundle.getString("CLIENT_SECRET");
-    REFRESH_TOKEN = bundle.getString("REFRESH_TOKEN");
+    ACCOUNT_ID = Long.parseLong(Optional.ofNullable(System.getenv("ACCOUNT_ID")).orElseGet(() ->
+        bundle.getString("ACCOUNT_ID")));
+    CLIENT_ID = Optional.ofNullable(System.getenv("CLIENT_ID")).orElseGet(() ->
+        bundle.getString("CLIENT_ID"));
+    CLIENT_SECRET = Optional.ofNullable(System.getenv("CLIENT_SECRET")).orElseGet(() ->
+        bundle.getString("CLIENT_SECRET"));
+    REFRESH_TOKEN = Optional.ofNullable(System.getenv("REFRESH_TOKEN")).orElseGet(() ->
+        bundle.getString("REFRESH_TOKEN"));
   }
 
   public static YahooJapanAdsApiClient getYahooJapanAdsApiClient() {

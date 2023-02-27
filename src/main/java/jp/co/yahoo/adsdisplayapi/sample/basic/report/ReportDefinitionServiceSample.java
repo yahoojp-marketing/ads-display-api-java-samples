@@ -3,27 +3,28 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.basic.report;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v9.api.ReportDefinitionServiceApi;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportDateRangeType;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportDownloadEncode;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportDownloadFormat;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportJobStatus;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportLanguage;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportSortField;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceReportSortType;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v9.model.ReportDefinitionServiceType;
+import jp.co.yahoo.adsdisplayapi.v10.api.ReportDefinitionServiceApi;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceDownloadSelector;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceGetReportFields;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportDateRangeType;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportDownloadEncode;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportDownloadFormat;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportJobStatus;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportLanguage;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportSortField;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportSortType;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceReportType;
+import jp.co.yahoo.adsdisplayapi.v10.model.ReportDefinitionServiceSelector;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StreamUtils;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * example ReportDefinitionService operation.
@@ -63,7 +64,7 @@ public class ReportDefinitionServiceSample {
   private static void getReportFields() {
     // Create the getReportFields.
     ReportDefinitionServiceGetReportFields getReportFields = new ReportDefinitionServiceGetReportFields();
-    getReportFields.setType(ReportDefinitionServiceType.AD);
+    getReportFields.setReportType(ReportDefinitionServiceReportType.AD);
 
     // Get the reportFields.
     reportDefinitionService.reportDefinitionServiceGetReportFieldsPost(getReportFields);

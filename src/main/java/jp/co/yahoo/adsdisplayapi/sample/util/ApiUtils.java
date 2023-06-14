@@ -3,10 +3,10 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
-import java.util.Map;
+import jp.co.yahoo.adsdisplayapi.v11.YahooJapanAdsApiClient;
+
 import java.util.Optional;
 import java.util.ResourceBundle;
-import jp.co.yahoo.adsdisplayapi.v10.YahooJapanAdsApiClient;
 
 /**
  * Utility method collection for Java Sample Program.

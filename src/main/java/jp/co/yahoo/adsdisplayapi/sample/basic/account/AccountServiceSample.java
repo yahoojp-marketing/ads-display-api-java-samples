@@ -4,14 +4,14 @@
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v11.api.AccountServiceApi;
-import jp.co.yahoo.adsdisplayapi.v11.model.Account;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceAutoTaggingEnabled;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceStatus;
-import jp.co.yahoo.adsdisplayapi.v11.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v12.api.AccountServiceApi;
+import jp.co.yahoo.adsdisplayapi.v12.model.Account;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v12.model.AccountServiceType;
 
 /**
  * example AccountService operation.
@@ -47,7 +47,7 @@ public class AccountServiceSample {
     selector.addAccountTypesItem(AccountServiceType.PREPAY);
 
     // Get the account.
-    accountService.accountServiceGetPost(selector);
+    accountService.accountServiceGetPost(ApiUtils.BASE_ACCOUNT_ID, selector);
   }
 
   /**
@@ -63,7 +63,7 @@ public class AccountServiceSample {
     operation.addOperandItem(operand);
 
     // Set the account.
-    accountService.accountServiceSetPost(operation);
+    accountService.accountServiceSetPost(ApiUtils.BASE_ACCOUNT_ID, operation);
   }
 
 }

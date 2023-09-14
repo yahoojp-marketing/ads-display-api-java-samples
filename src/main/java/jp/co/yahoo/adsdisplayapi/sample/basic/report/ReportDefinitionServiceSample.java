@@ -4,22 +4,22 @@
 package jp.co.yahoo.adsdisplayapi.sample.basic.report;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v11.api.ReportDefinitionServiceApi;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinition;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceDownloadSelector;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceGetReportFields;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceGetResponse;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceMutateResponse;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportDateRangeType;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportDownloadEncode;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportDownloadFormat;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportJobStatus;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportLanguage;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportSortField;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportSortType;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceReportType;
-import jp.co.yahoo.adsdisplayapi.v11.model.ReportDefinitionServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v12.api.ReportDefinitionServiceApi;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinition;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceDownloadSelector;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceGetReportFields;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceGetResponse;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceMutateResponse;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportDateRangeType;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportDownloadEncode;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportDownloadFormat;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportJobStatus;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportLanguage;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportSortField;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportSortType;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceReportType;
+import jp.co.yahoo.adsdisplayapi.v12.model.ReportDefinitionServiceSelector;
 import org.springframework.core.io.Resource;
 import org.springframework.util.StreamUtils;
 
@@ -92,7 +92,7 @@ public class ReportDefinitionServiceSample {
     operation.addOperandItem(operand);
 
     // Add the report.
-    return reportDefinitionService.reportDefinitionServiceAddPost(operation);
+    return reportDefinitionService.reportDefinitionServiceAddPost(ApiUtils.BASE_ACCOUNT_ID, operation);
   }
 
   /**
@@ -107,7 +107,7 @@ public class ReportDefinitionServiceSample {
     selector.addReportJobIdsItem(reportJobId);
 
     // Get the report.
-    return reportDefinitionService.reportDefinitionServiceGetPost(selector);
+    return reportDefinitionService.reportDefinitionServiceGetPost(ApiUtils.BASE_ACCOUNT_ID, selector);
   }
 
   /**
@@ -156,7 +156,7 @@ public class ReportDefinitionServiceSample {
     selector.setReportJobId(reportJobId);
 
     // Download the report.
-    Resource report = reportDefinitionService.reportDefinitionServiceDownloadPost(selector);
+    Resource report = reportDefinitionService.reportDefinitionServiceDownloadPost(ApiUtils.BASE_ACCOUNT_ID, selector);
     System.out.println("### reportString=\n" + StreamUtils.copyToString(report.getInputStream(), StandardCharsets.UTF_8));
   }
 
@@ -174,7 +174,7 @@ public class ReportDefinitionServiceSample {
     operation.addOperandItem(operand);
 
     // Remove the report.
-    reportDefinitionService.reportDefinitionServiceRemovePost(operation);
+    reportDefinitionService.reportDefinitionServiceRemovePost(ApiUtils.BASE_ACCOUNT_ID, operation);
   }
 
 }

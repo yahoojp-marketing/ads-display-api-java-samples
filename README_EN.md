@@ -12,7 +12,7 @@ src/main/
   - resources/
     - api_config.properties.dist    : Config files to specify Ids. Rename this file to "api_config.properties"
   - java/jp/co/yahoo/adsdisplayapi/sample
-    - basic/                      : Examples of each services.
+    - basic/                      : Examples of each service.
     - util/                       : Utilities which help you use the code samples.
 
 ## Development environment
@@ -37,5 +37,5 @@ mvn exec:java -Dexec.mainClass=jp.co.yahoo.adsdisplayapi.sample.basic.report.Rep
 
 ## NOTICE：Yahoo! JAPAN Ads Display Ads API - For use of sample code
 
-The sample code of Yahoo! JAPAN Ads API is provided to API users only who concluded the contract of "Application to Use Yahoo! JAPAN Promotional Ads API" with Yahoo Japan Corporation.  
-Additionally, please note that Yahoo Japan Corporation may change the contents and the specification of the sample code, and may discontinue providing the sample code without any notice.  
+The sample code of Yahoo! JAPAN Ads API is provided to API users only who concluded the contract of "Application to Use Yahoo! JAPAN Ads API" with LY Corporation.  
+Additionally, please note that LY Corporation may change the contents and the specification of the sample code, and may discontinue providing the sample code without any notice.  

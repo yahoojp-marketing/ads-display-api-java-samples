@@ -3,7 +3,7 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
-import jp.co.yahoo.adsdisplayapi.v18.YahooJapanAdsApiClient;
+import jp.co.yahoo.adsdisplayapi.v19.YahooJapanAdsApiClient;
 
 import java.util.Optional;
 import java.util.ResourceBundle;

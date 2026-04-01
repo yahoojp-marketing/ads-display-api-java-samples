@@ -1,4 +1,4 @@
-# Yahoo!広告 ディスプレイ広告 API Javaサンプルプログラム
+# LINEヤフー広告 ディスプレイ広告 API Javaサンプルプログラム
 
 Javaサンプルプログラムです。
 
@@ -6,7 +6,7 @@ Javaサンプルプログラムです。
 
 ### [日本語](./README_JA.md)
 
-# Yahoo! Ads Display Ads API Java sample code
+# LY Ads Display Ads API Java sample code
 
 Java sample code.
 

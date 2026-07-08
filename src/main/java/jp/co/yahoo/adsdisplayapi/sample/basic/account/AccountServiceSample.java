@@ -4,21 +4,21 @@
 package jp.co.yahoo.adsdisplayapi.sample.basic.account;
 
 import jp.co.yahoo.adsdisplayapi.sample.util.ApiUtils;
-import jp.co.yahoo.adsdisplayapi.v19.api.AccountServiceApi;
-import jp.co.yahoo.adsdisplayapi.v19.model.Account;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceAutoTaggingEnabled;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceDeliveryStatus;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceOperation;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceSelector;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceStatus;
-import jp.co.yahoo.adsdisplayapi.v19.model.AccountServiceType;
+import jp.co.yahoo.adsdisplayapi.v20.api.AccountServiceApi;
+import jp.co.yahoo.adsdisplayapi.v20.model.Account;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceAutoTaggingEnabled;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceDeliveryStatus;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceOperation;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceSelector;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceStatus;
+import jp.co.yahoo.adsdisplayapi.v20.model.AccountServiceType;
 
 /**
  * example AccountService operation.
  */
 public class AccountServiceSample {
 
-  private static final AccountServiceApi accountService = new AccountServiceApi(ApiUtils.getYahooJapanAdsApiClient());
+  private static final AccountServiceApi accountService = new AccountServiceApi(ApiUtils.getAdsApiClient());
 
   /**
    * example AccountService operation.

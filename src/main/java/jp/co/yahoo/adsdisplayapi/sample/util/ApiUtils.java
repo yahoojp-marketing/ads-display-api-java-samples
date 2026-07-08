@@ -3,7 +3,7 @@
  */
 package jp.co.yahoo.adsdisplayapi.sample.util;
 
-import jp.co.yahoo.adsdisplayapi.v19.YahooJapanAdsApiClient;
+import jp.co.yahoo.adsdisplayapi.v20.AdsApiClient;
 
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -41,10 +41,10 @@ public class ApiUtils {
         bundle.getString("REFRESH_TOKEN"));
   }
 
-  public static YahooJapanAdsApiClient getYahooJapanAdsApiClient() {
-    YahooJapanAdsApiClient yahooJapanAdsApiClient = new YahooJapanAdsApiClient(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN);
-    yahooJapanAdsApiClient.setDebugging(true);
-    return yahooJapanAdsApiClient;
+  public static AdsApiClient getAdsApiClient() {
+    AdsApiClient adsApiClient = new AdsApiClient(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN);
+    adsApiClient.setDebugging(true);
+    return adsApiClient;
   }
 
 }
